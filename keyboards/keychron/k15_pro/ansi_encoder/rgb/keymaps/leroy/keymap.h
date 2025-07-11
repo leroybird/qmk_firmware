@@ -12,3 +12,8 @@
 #define HOME_L RALT_T(KC_L)  // L acts as Alt when held
 #define HOME_SCLN RGUI_T(KC_SCLN)  // ; acts as GUI (Cmd/Win) when held
 
+// Custom keycodes
+enum custom_keycodes {
+    WIN_TOG = SAFE_RANGE,
+};
+

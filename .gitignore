@@ -114,3 +114,7 @@ via*.json
 
 # Keep firmware file
 !keyboards/keychron/*/firmware/*.bin
+
+# pixi environments
+.pixi
+*.egg-info

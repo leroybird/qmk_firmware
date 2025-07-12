@@ -14,8 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "keymap.h"
 #include QMK_KEYBOARD_H
+#include "keymap.h"
 
 enum layers {
     MAC_BASE,
@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         MC_2,       KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,      KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,            KC_PGDN,
         MC_3,       KC_ESC,  HOME_A,    HOME_S,   HOME_D,   HOME_F,   KC_G,      KC_H,     HOME_J,   HOME_K,   HOME_L,   HOME_SCLN,  KC_QUOT,            KC_ENT,             KC_HOME,
         MC_4,       KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_RSFT,  KC_UP,
-        MC_5,       KC_LCTL,  KC_LWIN,            KC_LALT,  KC_SPC,  MO(WIN_FN),           WIN_TOG,            KC_RALT,            KC_RCTL,            KC_LEFT,  KC_DOWN,  KC_RGHT),
+        MC_5,       KC_LCTL,  KC_LWIN,            KC_LALT,  KC_SPC,  MO(WIN_FN),           TO(WIN_NUM_BASE),   KC_RALT,            KC_RCTL,            KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [WIN_FN] = LAYOUT_90_ansi(
         RGB_TOG,    _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_VAD,   RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,   KC_VOLU,  _______,            _______,
@@ -68,9 +68,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MUTE,    KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_INS,             KC_DEL,
         KC_CAPS,    KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,      KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,            KC_PGUP,
         MC_2,       KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,      KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,            KC_PGDN,
-        MC_3,       KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,      KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_QUOT,            KC_ENT,             KC_HOME,
+        MC_3,       KC_ESC,   HOME_1,   HOME_2,   HOME_3,   HOME_4,   HOME_5,    HOME_6,   HOME_7,   HOME_8,   HOME_9,   HOME_0,   KC_QUOT,            KC_ENT,             KC_HOME,
         MC_4,       KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_RSFT,  KC_UP,
-        MC_5,       KC_LCTL,  KC_LWIN,            KC_LALT,  KC_SPC,  MO(WIN_NUM_FN),       WIN_TOG,            KC_RALT,            KC_RCTL,            KC_LEFT,  KC_DOWN,  KC_RGHT),
+        MC_5,       KC_LCTL,  KC_LWIN,            KC_LALT,  KC_SPC,  MO(WIN_NUM_FN),       TO(WIN_BASE),       KC_RALT,            KC_RCTL,            KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [WIN_NUM_FN] = LAYOUT_90_ansi(
         RGB_TOG,    _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_VAD,   RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,   KC_VOLU,  _______,            _______,
@@ -98,20 +98,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case WIN_TOG:
-            if (record->event.pressed) {
-                if (layer_state_is(WIN_BASE)) {
-                    layer_move(WIN_NUM_BASE);
-                } else if (layer_state_is(WIN_NUM_BASE)) {
-                    layer_move(WIN_BASE);
-                }
-            }
-            return false;
-    }
-    return true;
-}
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {

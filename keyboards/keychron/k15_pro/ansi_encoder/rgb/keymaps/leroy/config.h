@@ -1,2 +1,3 @@
-#define QUICK_TAP_TERM 0
+#define QUICK_TAP_TERM 150
 #define TAPPING_TERM 220
+#define PERMISSIVE_HOLD
